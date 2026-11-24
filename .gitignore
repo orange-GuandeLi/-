@@ -1,0 +1,8 @@
+# Godot 导入缓存 / 导出产物
+.godot/
+/android/
+export_presets.cfg
+
+# 系统文件
+.DS_Store
+Thumbs.db

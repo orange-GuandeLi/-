@@ -1,0 +1,286 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/board.gd" id="2_board"]
+
+[sub_resource type="StyleBoxFlat" id="SB_Target"]
+bg_color = Color(0.105882, 0.121569, 0.168627, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.09)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="SB_Overlay"]
+bg_color = Color(0.0980392, 0.109804, 0.14902, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.14)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0705882, 0.0784314, 0.105882, 1)
+
+[node name="Header" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 92.0
+grow_horizontal = 2
+
+[node name="Title" type="Label" parent="Header"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 420.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0.933333, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "合成小院"
+
+[node name="Subtitle" type="Label" parent="Header"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 54.0
+offset_right = 660.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.564706, 0.619608, 0.72549, 1)
+theme_override_font_sizes/font_size = 15
+text = "拖动相同物品即可合成"
+
+[node name="HintLabel" type="Label" parent="Header"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 78.0
+offset_right = 660.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0.956863, 0.741176, 0.376471, 1)
+theme_override_font_sizes/font_size = 14
+text = ""
+
+[node name="TargetBox" type="Panel" parent="Header"]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 14.0
+offset_right = 1164.0
+offset_bottom = 78.0
+theme_override_styles/panel = SubResource("SB_Target")
+
+[node name="TargetLabel" type="Label" parent="Header/TargetBox"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 6.0
+offset_right = 268.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(1, 0.847059, 0.443137, 1)
+theme_override_font_sizes/font_size = 19
+text = "目标：浆果"
+
+[node name="MovesLabel" type="Label" parent="Header/TargetBox"]
+layout_mode = 0
+offset_left = 268.0
+offset_top = 6.0
+offset_right = 466.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.717647, 0.921569, 0.780392, 1)
+theme_override_font_sizes/font_size = 19
+text = "步数 8 / 8"
+horizontal_alignment = 2
+
+[node name="ScoreLabel" type="Label" parent="Header/TargetBox"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 36.0
+offset_right = 140.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0.788235, 0.803922, 0.878431, 1)
+theme_override_font_sizes/font_size = 15
+text = "得分 0"
+
+[node name="ComboLabel" type="Label" parent="Header/TargetBox"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 36.0
+offset_right = 268.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0.956863, 0.741176, 0.376471, 1)
+theme_override_font_sizes/font_size = 15
+text = "连击 ×0"
+horizontal_alignment = 2
+
+[node name="GenLabel" type="Label" parent="Header/TargetBox"]
+layout_mode = 0
+offset_left = 268.0
+offset_top = 36.0
+offset_right = 466.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0.705882, 0.780392, 0.921569, 1)
+theme_override_font_sizes/font_size = 15
+text = "生成 0 / 2"
+horizontal_alignment = 2
+
+[node name="Board" type="Control" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 104.0
+offset_right = 624.0
+offset_bottom = 596.0
+script = ExtResource("2_board")
+
+[node name="Side" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 104.0
+offset_right = 1168.0
+offset_bottom = 596.0
+theme_override_constants/separation = 8
+
+[node name="RecipeTitle" type="Label" parent="Side"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.705882, 0.780392, 0.921569, 1)
+theme_override_font_sizes/font_size = 18
+text = "合成图鉴"
+
+[node name="RecipeScroll" type="ScrollContainer" parent="Side"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="RecipeList" type="VBoxContainer" parent="Side/RecipeScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="ToolTitle" type="Label" parent="Side"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.956863, 0.741176, 0.376471, 1)
+theme_override_font_sizes/font_size = 18
+text = "道具（拖到物品上生效）"
+
+[node name="ToolHelp" type="VBoxContainer" parent="Side"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="GenTitle" type="Label" parent="Side"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.705882, 0.780392, 0.921569, 1)
+theme_override_font_sizes/font_size = 18
+text = "生成（免费，但会占用格子）"
+
+[node name="GenRow" type="HBoxContainer" parent="Side"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="GenLeaf" type="Button" parent="Side/GenRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "叶子"
+
+[node name="GenWheat" type="Button" parent="Side/GenRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "麦穗"
+
+[node name="GenDew" type="Button" parent="Side/GenRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "露珠"
+
+[node name="RestartButton" type="Button" parent="Side"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "重新开始本关"
+
+[node name="Overlay" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Center" type="CenterContainer" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Overlay/Center"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("SB_Overlay")
+
+[node name="VBox" type="VBoxContainer" parent="Overlay/Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Title" type="Label" parent="Overlay/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.847059, 0.443137, 1)
+theme_override_font_sizes/font_size = 30
+text = "过关！"
+horizontal_alignment = 1
+
+[node name="Text" type="Label" parent="Overlay/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.89, 0.95, 1)
+theme_override_font_sizes/font_size = 17
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Overlay/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Primary" type="Button" parent="Overlay/Center/Panel/VBox/Buttons"]
+custom_minimum_size = Vector2(130, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "下一关"
+
+[node name="Secondary" type="Button" parent="Overlay/Center/Panel/VBox/Buttons"]
+custom_minimum_size = Vector2(130, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "重玩本关"
